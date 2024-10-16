@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { Star } from 'lucide-react'
+import Link from 'next/link'
 
 export default function HomePage() {
   return (
@@ -25,9 +26,15 @@ export default function HomePage() {
                 </li>
               ))}
             </ul>
-            <button className="bg-amber-600 text-white px-6 py-3 rounded-full hover:bg-amber-700 transition duration-300">
+            
+            
+            <Link 
+              href="/products" 
+              className="inline-block bg-amber-600 text-white px-6 py-3 rounded-full hover:bg-amber-700 transition duration-300">
               Ver Nossos Produtos
-            </button>
+            </Link>
+            
+            
           </div>
 
           <div className="lg:w-1/2 relative">
