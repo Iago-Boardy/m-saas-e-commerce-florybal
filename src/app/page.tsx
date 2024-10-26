@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { Star } from 'lucide-react'
 import Link from 'next/link'
+import SimpleFooter from '@/components/footer'
 
 export default function HomePage() {
   return (
@@ -58,6 +59,7 @@ export default function HomePage() {
 
         </div>
       </main>
+      <SimpleFooter/>
     </div>
   )
 }
