@@ -72,8 +72,8 @@ export default function Navbar() {
                 Cadastrar-se
               </Link>
               
-              <LoginButton>
-                <span className="cursor-pointer text-amber-900 hover:text-amber-700 transition-colors">Login</span>
+              <LoginButton> 
+                <span className="cursor-pointer text-amber-900 hover:text-amber-700 transition-colors">Login</span> 
               </LoginButton>
 
               <div className="h-8 w-px bg-zinc-200 hidden sm:block"></div>

@@ -15,9 +15,8 @@ export default function RootLayout({
 }>) {
   const pathname = usePathname();
 
-  // Renderiza a Navbar apenas se não estiver na rota /admin
-  const showNavbar = !pathname.startsWith("/admin"); //const showNavbar = !(pathname.startsWith("/admin") || pathname.startsWith("/products")); EXEMPLO PARA MAIS PAGINAS
-
+  // Oculta a Navbar nas rotas /admin e /auth
+  const showNavbar = !pathname.startsWith("/admin") && !pathname.startsWith("/auth"); 
 
   return (
     <html lang="en">
