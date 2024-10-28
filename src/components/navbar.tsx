@@ -11,8 +11,8 @@ export default function Navbar() {
     <header className="w-full bg-amber-50 border-b border-amber-100 fixed top-0 left-0 z-50"> 
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         <Link href="/" className="text-[16px] font-bold sm:text-2xl">
-          <span className="text-amber-900">Chocolates</span>
-          <span className="text-amber-600">daFlorybal</span>
+          <span className="text-amber-900">Florybal</span>
+          <span className="text-amber-600"> Ivoti</span>
         </Link>
 
         <nav className="flex items-center space-x-6">
