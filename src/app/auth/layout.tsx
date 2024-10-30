@@ -2,6 +2,11 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+
+
 
 export default function AuthLayout({
   children,
@@ -9,10 +14,8 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className={cn("flex min-h-screen items-center justify-center bg-gray-50 p-4")}>
-      <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6">
-        {children}
-      </div>
-    </div>
+    <body className={cn("bg-background min-h-screen font-sans antialiased", inter.variable)}>
+      {children}
+    </body>
   );
 }
