@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Mail } from 'lucide-react'
 
 import { LoginSchema } from '../../../schemas'
@@ -14,7 +13,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 export default function LoginPage() {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false) //For now this have no use
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -67,7 +66,7 @@ export default function LoginPage() {
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? 'Entrando...' : 'Login com Email'}
             </Button>
-            
+
           </form>
 
           <div className="mt-4 space-y-2">
