@@ -15,7 +15,6 @@ import { z } from 'zod'
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -25,6 +24,10 @@ export default function LoginPage() {
     }
   })
 
+  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+    console.log(values)
+  } 
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-amber-50 to-amber-100">
       <Card className="w-full max-w-md">
@@ -33,7 +36,7 @@ export default function LoginPage() {
           <CardDescription>Entre na sua conta</CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={form.handleSubmit((data) => console.log(data))} className="space-y-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -60,9 +63,11 @@ export default function LoginPage() {
                 </p>
               )}
             </div>
+
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? 'Entrando...' : 'Login com Email'}
             </Button>
+            
           </form>
 
           <div className="mt-4 space-y-2">
@@ -77,11 +82,7 @@ export default function LoginPage() {
             </Button>
           </div>
 
-          {error && (
-            <Alert variant="destructive" className="mt-4">
-              <AlertDescription>{error}</AlertDescription>
-            </Alert>
-          )}
+          
         </CardContent>
         <CardFooter className="justify-center">
           <p className="text-sm text-gray-600">
