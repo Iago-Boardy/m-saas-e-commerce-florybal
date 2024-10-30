@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Github, Mail } from 'lucide-react'
+import { Mail } from 'lucide-react'
 
 import { LoginSchema } from '../../../schemas'
 import { useForm } from 'react-hook-form'
@@ -18,37 +18,50 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null)
 
   const form = useForm<z.infer<typeof LoginSchema>>({
-    resolver: zodResolver(LoginSchema)
+    resolver: zodResolver(LoginSchema),
+    defaultValues: {
+      email: "",
+      password: ""
+    }
   })
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-amber-50 to-amber-100">
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className='text-3xl'>Login</CardTitle>
-          <CardDescription>Sign in to your account</CardDescription>
+          <CardDescription>Entre na sua conta</CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+          <form onSubmit={form.handleSubmit((data) => console.log(data))} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
-                type="email"
                 placeholder="m@example.com"
-                required
+                {...form.register("email")}
               />
+              {form.formState.errors.email && (
+                <p className="text-red-500 text-sm">
+                  {form.formState.errors.email.message}
+                </p>
+              )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">Senha</Label>
               <Input
                 id="password"
                 type="password"
-                required
+                {...form.register("password")}
               />
+              {form.formState.errors.password && (
+                <p className="text-red-500 text-sm">
+                  {form.formState.errors.password.message}
+                </p>
+              )}
             </div>
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Logging in...' : 'Login with Email'}
+              {loading ? 'Entrando...' : 'Login com Email'}
             </Button>
           </form>
 
@@ -59,17 +72,8 @@ export default function LoginPage() {
               className="w-full"
               disabled={loading}
             >
-              <Github className="mr-2 h-4 w-4" />
-              Login with GitHub
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              className="w-full"
-              disabled={loading}
-            >
               <Mail className="mr-2 h-4 w-4" />
-              Login with Google
+              Login com Google
             </Button>
           </div>
 
@@ -81,9 +85,9 @@ export default function LoginPage() {
         </CardContent>
         <CardFooter className="justify-center">
           <p className="text-sm text-gray-600">
-            Don't have an account?{' '}
+            Não tem uma conta?{' '}
             <a href="/signup" className="text-blue-600 hover:underline">
-              Sign up
+              Cadastrar-se
             </a>
           </p>
         </CardFooter>
