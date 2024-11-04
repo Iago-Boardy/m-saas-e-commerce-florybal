@@ -7,40 +7,39 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Mail } from 'lucide-react'
 
-import { LoginSchema } from '../../../schemas'
+import { RegisterSchema } from '../../../schemas'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { FormError } from '@/components/form-error'
 import { FormSucess } from '@/components/form-sucess'
-import { login } from '../../../actions/login'
+import { register } from '../../../actions/register'
 
-
-export default function LoginPage() {
+export default function RegisterForm() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | undefined>("")
-  const [sucess, setSucess] = useState<string | undefined>("")
+  const [success, setSuccess] = useState<string | undefined>("")
 
-
-  const form = useForm<z.infer<typeof LoginSchema>>({
-    resolver: zodResolver(LoginSchema),
+  const form = useForm<z.infer<typeof RegisterSchema>>({
+    resolver: zodResolver(RegisterSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: ""
     }
   })
 
-  const onSubmit = async (values: z.infer<typeof LoginSchema>) => {
+  const onSubmit = async (values: z.infer<typeof RegisterSchema>) => {
     setError("")
-    setSucess("")
+    setSuccess("")
 
     setLoading(true)
-    login(values)
+    register(values)
     .then((data) => {
-      setError(data.error),
-      setSucess(data.sucess)
+      setError(data.error)
+      setSuccess(data.sucess)
     })
-    await new Promise((resolve) => setTimeout(resolve, 2000)) // Aguarda 2 segundos
+    await new Promise((resolve) => setTimeout(resolve, 1000)) // Wait for 2 seconds
     setLoading(false)
   } 
 
@@ -48,11 +47,24 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-amber-50 to-amber-100">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className='text-3xl'>Login</CardTitle>
-          <CardDescription>Entre na sua conta</CardDescription>
+          <CardTitle className='text-3xl'>Criar uma Conta</CardTitle>
+          <CardDescription>Crie sua nova conta</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="name">Nome</Label>
+              <Input
+                id="name"
+                placeholder="Seu nome"
+                {...form.register("name")}
+              />
+              {form.formState.errors.name && (
+                <p className="text-red-500 text-sm">
+                  {form.formState.errors.name.message}
+                </p>
+              )}
+            </div>
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -82,12 +94,11 @@ export default function LoginPage() {
             </div>
 
             <FormError message={error}/>
-            <FormSucess message={sucess}/>
+            <FormSucess message={success}/>
 
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Entrando...' : 'Login com Email'}
+              {loading ? 'Cadastrando...' : 'Cadastrar'}
             </Button>
-
           </form>
 
           <div className="mt-4 space-y-2">
@@ -98,17 +109,15 @@ export default function LoginPage() {
               disabled={loading}
             >
               <Mail className="mr-2 h-4 w-4" />
-              Login com Google
+              Cadastrar com Google
             </Button>
           </div>
-
-          
         </CardContent>
         <CardFooter className="justify-center">
           <p className="text-sm text-gray-600">
-            Não tem uma conta?{' '}
-            <a href="/auth/register" className="text-blue-600 hover:underline">
-              Cadastrar-se
+            Já tem uma conta?{' '}
+            <a href="/auth/login" className="text-blue-600 hover:underline">
+              Fazer login
             </a>
           </p>
         </CardFooter>
