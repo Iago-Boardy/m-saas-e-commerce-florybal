@@ -28,6 +28,8 @@ yarn-error.log*
 # local env files
 .env*.local
 
+#PROBABLY SHOULD BE REMOVING THIS TO WORK TOGETHER OR ADD THE .ENV AGAIN
+
 # vercel
 .vercel
 
