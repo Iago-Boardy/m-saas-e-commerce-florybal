@@ -11,6 +11,10 @@ import { LoginSchema } from '../../../schemas'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { FormError } from '@/components/form-error'
+import { FormSucess } from '@/components/form-sucess'
+import { login } from '../../../actions/login'
+
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false) //For now this have no use
@@ -23,8 +27,11 @@ export default function LoginPage() {
     }
   })
 
-  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-    console.log(values)
+  const onSubmit = async (values: z.infer<typeof LoginSchema>) => {
+    setLoading(true)
+    login(values)
+    await new Promise((resolve) => setTimeout(resolve, 2000)) // Aguarda 2 segundos
+    setLoading(false)
   } 
 
   return (
@@ -54,6 +61,7 @@ export default function LoginPage() {
               <Input
                 id="password"
                 type="password"
+                placeholder="...."
                 {...form.register("password")}
               />
               {form.formState.errors.password && (
@@ -62,6 +70,9 @@ export default function LoginPage() {
                 </p>
               )}
             </div>
+
+            <FormError message=''/>
+            <FormSucess message=''/>
 
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? 'Entrando...' : 'Login com Email'}
