@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Mail } from 'lucide-react'
+import { Mail, Eye, EyeOff } from 'lucide-react'
 
 import { RegisterSchema } from '../../../schemas'
 import { useForm } from 'react-hook-form'
@@ -19,6 +19,7 @@ export default function RegisterForm() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | undefined>("")
   const [success, setSuccess] = useState<string | undefined>("")
+  const [showPassword, setShowPassword] = useState(false)
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -39,9 +40,13 @@ export default function RegisterForm() {
       setError(data.error)
       setSuccess(data.sucess)
     })
-    await new Promise((resolve) => setTimeout(resolve, 1000)) // Wait for 2 seconds
+    await new Promise((resolve) => setTimeout(resolve, 1000)) // Wait for 1 second
     setLoading(false)
   } 
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword)
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-amber-50 to-amber-100">
@@ -80,12 +85,30 @@ export default function RegisterForm() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Senha</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="...."
-                {...form.register("password")}
-              />
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="...."
+                  {...form.register("password")}
+                />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-4 w-4 text-gray-500" />
+                  ) : (
+                    <Eye className="h-4 w-4 text-gray-500" />
+                  )}
+                  <span className="sr-only">
+                    {showPassword ? "Hide password" : "Show password"}
+                  </span>
+                </Button>
+              </div>
               {form.formState.errors.password && (
                 <p className="text-red-500 text-sm">
                   {form.formState.errors.password.message}
@@ -96,7 +119,7 @@ export default function RegisterForm() {
             <FormError message={error}/>
             <FormSucess message={success}/>
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full bg-amber-700" disabled={loading}>
               {loading ? 'Cadastrando...' : 'Cadastrar'}
             </Button>
           </form>
