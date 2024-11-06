@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { ShoppingCart } from 'lucide-react'
 import SimpleFooter from '@/components/footer'
 import ProductCard from '@/components/cardCustom'
-import { auth } from "../../../../auth"
+import { auth, signOut } from "../../../../auth"
 
 const products = [
   { id: 1, name: 'Trufa de Chocolate', price: 'R$ 5,99', image: '/placeholder.svg?height=200&width=200' },
@@ -24,7 +24,18 @@ export default async function ProductsPage() {
   return (
     <div className="min-h-screen bg-amber-50 flex flex-col">
       <main className="flex-grow pt-20">
+
         <h1>{JSON.stringify(session)}</h1>
+        <form action={async () => {
+          "use server";
+
+          await signOut();
+        }}>
+          <button>
+            Sair da conta
+          </button>
+        </form>
+        
         <section className="max-w-7xl mx-auto px-4 py-12">
           <h1 className="text-4xl font-bold text-amber-900 mb-8">Nossos Produtos</h1>
           
