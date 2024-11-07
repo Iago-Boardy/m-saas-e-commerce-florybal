@@ -4,7 +4,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { LoginButton } from './auth/login-button';
 
 export default function Navbar() {
-  const user = undefined;
+  const user = false;
   const isAdmin = false;
   
   return (

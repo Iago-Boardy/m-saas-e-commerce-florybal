@@ -4,6 +4,7 @@ import { ShoppingCart } from 'lucide-react'
 import SimpleFooter from '@/components/footer'
 import ProductCard from '@/components/cardCustom'
 import { auth, signOut } from "../../../../auth"
+import { redirect } from 'next/dist/server/api-utils'
 
 const products = [
   { id: 1, name: 'Trufa de Chocolate', price: 'R$ 5,99', image: '/placeholder.svg?height=200&width=200' },
@@ -29,7 +30,11 @@ export default async function ProductsPage() {
         <form action={async () => {
           "use server";
 
-          await signOut();
+          await signOut({
+            redirectTo: "/auth/login"
+          });
+
+          
         }}>
           <button>
             Sair da conta

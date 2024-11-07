@@ -36,8 +36,11 @@ export default function LoginPage() {
     setLoading(true)
     login(values)
     .then((data) => {
-      setError(data.error),
-      setSucess(data.sucess)
+      if (data?.error) {
+        setError(data.error)
+      }
+
+      
     })
     await new Promise((resolve) => setTimeout(resolve, 2000)) // Aguarda 2 segundos
     setLoading(false)
