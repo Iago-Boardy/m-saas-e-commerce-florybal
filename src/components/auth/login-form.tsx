@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Mail, Eye, EyeOff } from 'lucide-react'
+import { signIn } from 'next-auth/react'
 
 import { LoginSchema } from '../../../schemas'
 import { useForm } from 'react-hook-form'
@@ -14,6 +15,7 @@ import { z } from 'zod'
 import { FormError } from '@/components/form-error'
 import { FormSucess } from '@/components/form-sucess'
 import { login } from '../../../actions/login'
+import { DEFAULT_LOGIN_REDIRECT } from '../../../routes'
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false)
@@ -48,6 +50,13 @@ export default function LoginPage() {
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword)
+  }
+
+  const onClick = (provider: "google") => {
+    signIn(provider, {
+      callbackUrl: DEFAULT_LOGIN_REDIRECT,
+
+    })
   }
 
   return (
@@ -119,6 +128,7 @@ export default function LoginPage() {
               variant="outline"
               className="w-full"
               disabled={loading}
+              onClick={() => onClick("google")}
             >
               <Mail className="mr-2 h-4 w-4" />
               Login com Google
