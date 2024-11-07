@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Mail, Eye, EyeOff } from 'lucide-react'
+import { signIn } from 'next-auth/react'
 
 import { RegisterSchema } from '../../../schemas'
 import { useForm } from 'react-hook-form'
@@ -14,6 +15,7 @@ import { z } from 'zod'
 import { FormError } from '@/components/form-error'
 import { FormSucess } from '@/components/form-sucess'
 import { register } from '../../../actions/register'
+import { DEFAULT_LOGIN_REDIRECT } from '../../../routes'
 
 export default function RegisterForm() {
   const [loading, setLoading] = useState(false)
@@ -46,6 +48,13 @@ export default function RegisterForm() {
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword)
+  }
+
+  const onClick = (provider: "google") => {
+    signIn(provider, {
+      callbackUrl: DEFAULT_LOGIN_REDIRECT,
+
+    })
   }
 
   return (
@@ -130,6 +139,7 @@ export default function RegisterForm() {
               variant="outline"
               className="w-full"
               disabled={loading}
+              onClick={() => onClick("google")}
             >
               <Mail className="mr-2 h-4 w-4" />
               Cadastrar com Google
