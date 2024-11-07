@@ -53,7 +53,7 @@ export default async function ProductsPage() {
         <section className="bg-amber-100 py-16">
           <div className="max-w-7xl mx-auto px-4">
             <Image
-              src="/placeholder.svg?height=400&width=1200"
+              src="/images/panetone.webp"
               alt="Banner promocional"
               width={1200}
               height={400}
@@ -88,7 +88,7 @@ export default async function ProductsPage() {
               </div>
               <div className="md:w-1/2">
                 <Image
-                  src="/placeholder.svg?height=300&width=500"
+                  src="/images/chocolate.webp"
                   alt="Coleção Especial de Chocolates"
                   width={500}
                   height={300}
