@@ -22,12 +22,12 @@ model User {
   emailVerified DateTime? @map("email_verified")
   image         String?
   password      String?
-  role          UserRole               @default(USER)       
+  role          UserRole               @default(USER)
   accounts      Account[]
- 
+  orders        Order[]                // relação com Order, que intermedia User e Product
+
   @@map("users")
 }
-
 
 model Account {
   id                 String  @id @default(cuid())
@@ -42,9 +42,37 @@ model Account {
   scope              String?
   id_token           String? @db.Text
   session_state      String?
- 
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@unique([provider, providerAccountId])
   @@map("accounts")
+}
+
+model Product {
+  id                     String     @id @default(uuid())
+  name                   String
+  priceInCents           Int
+  imagePath              String
+  description            String
+  isAvaliableForPurchase Boolean    @default(true)
+  createdAt              DateTime   @default(now())
+  updatedAt              DateTime   @updatedAt
+  orders                 Order[]    // relação com Order
+
+  @@map("products")
+}
+
+model Order {
+  id               String   @id @default(uuid())
+  pricePaidInCents Int
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  userId    String
+  productId String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+  
+  @@map("orders")
 }
