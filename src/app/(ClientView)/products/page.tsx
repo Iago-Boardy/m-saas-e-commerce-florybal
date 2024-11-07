@@ -5,6 +5,7 @@ import SimpleFooter from '@/components/footer'
 import ProductCard from '@/components/cardCustom'
 import { auth, signOut } from "../../../../auth"
 
+
 const products = [
   { id: 1, name: 'Trufa de Chocolate', price: 'R$ 5,99', image: '/placeholder.svg?height=200&width=200' },
   { id: 2, name: 'Barra de Chocolate ao Leite', price: 'R$ 12,99', image: '/placeholder.svg?height=200&width=200' },

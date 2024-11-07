@@ -1,12 +1,24 @@
-import Link from 'next/link';
-import { ArrowRight, ChevronDown, Clock, ShoppingCart, User } from 'lucide-react';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
-import { LoginButton } from './auth/login-button';
+'use client'
+
+import { useEffect } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { ArrowRight, ChevronDown, Clock, ShoppingCart, User } from 'lucide-react'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { useSession } from 'next-auth/react'
+import { handleSignOut } from '../../actions/navbar'
 
 export default function Navbar() {
-  const user = false;
-  const isAdmin = false;
+  const router = useRouter()
+  const { data: session, status } = useSession()
   
+  const isAuthenticated = session !== null
+  const isAdmin = isAuthenticated && session?.user?.role === 'ADMIN'
+  
+  useEffect(() => {
+    router.refresh()
+  }, [router]) 
+
   return (
     <header className="w-full bg-amber-50 border-b border-amber-100 fixed top-0 left-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
@@ -16,21 +28,22 @@ export default function Navbar() {
         </Link>
 
         <nav className="flex items-center space-x-6">
-          {user ? (
+          {isAuthenticated ? (
             <>
-              <Link href="/api/auth/logout" className="text-amber-900 hover:text-amber-700 transition-colors">
-                Sair
-              </Link>
+              <form action={handleSignOut}>
+                <button type="submit" className="text-amber-900 hover:text-amber-700 transition-colors">
+                  Sair
+                </button>
+              </form>
               
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Link 
-                    href="#" 
-                    className="text-amber-900 hover:text-amber-700 transition-colors flex items-center px-3 py-2 rounded-md focus:outline-none"
+                  <span 
+                    className="text-amber-900 hover:text-amber-700 transition-colors flex items-center px-3 py-2 rounded-md focus:outline-none cursor-pointer"
                   >
                     Perfil
                     <ChevronDown className="ml-2 h-4 w-4" />
-                  </Link>
+                  </span>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56 bg-amber-50 border shadow-xl rounded-md p-2">
                   <DropdownMenuLabel className="text-amber-900 font-semibold px-2 py-1">Minha Conta</DropdownMenuLabel>
@@ -53,11 +66,11 @@ export default function Navbar() {
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              {isAdmin ? (
+              {isAdmin && (
                 <Link href="/admin" className="text-amber-900 hover:text-amber-700 transition-colors">
                   Dashboard ✨
                 </Link>
-              ) : null}
+              )}
 
               <div className="h-8 w-px bg-zinc-200 hidden sm:block"></div>
 
@@ -72,9 +85,9 @@ export default function Navbar() {
                 Cadastrar-se
               </Link>
               
-              <LoginButton> 
-                <span className="cursor-pointer text-amber-900 hover:text-amber-700 transition-colors">Login</span>  
-              </LoginButton>
+              <Link href="/auth/login" className="text-amber-900 hover:text-amber-700 transition-colors"> 
+                Login
+              </Link>
 
               <div className="h-8 w-px bg-zinc-200 hidden sm:block"></div>
 
@@ -87,5 +100,5 @@ export default function Navbar() {
         </nav>
       </div>
     </header>
-  );
+  )
 }
