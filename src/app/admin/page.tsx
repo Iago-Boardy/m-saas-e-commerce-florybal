@@ -2,10 +2,8 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { CalendarDays, CreditCard, DollarSign, Users } from "lucide-react"
-import { useCurrentRole } from "../../../hooks/use-current-role"
 
 export default function AdminHome() {
-    const role = useCurrentRole();
 
     return (
         <div className="flex flex-col w-full">
