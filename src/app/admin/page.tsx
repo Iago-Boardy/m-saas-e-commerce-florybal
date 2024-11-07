@@ -53,9 +53,9 @@ export default async function AdminHome() {
     <div className="flex flex-col w-full">
       <main className="flex-1 lg:px-8 px-4 py-6 space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <DashboardCard title="Sales" subtitle={`${formatNumber(salesData.numberOfSales)} Pedidos`} body={formatCurrency(salesData.amount)} icon={<DollarSign className="h-4 w-4 text-muted-foreground" />} />
-        <DashboardCard title="Clientes" subtitle={`${formatCurrency(userData.avarageValuePerUser)} Valor médio`} body={formatNumber(userData.userCount)} icon={<Users className="h-4 w-4 text-muted-foreground" />} />
-        <DashboardCard title="Produtos" subtitle={`${formatNumber(productData.inactiveCount)} Valor médio`} body={formatNumber(productData.activeCount)} icon={<CreditCard className="h-4 w-4 text-muted-foreground" />} />
+        <DashboardCard title="Vendas" subtitle={`${formatNumber(salesData.numberOfSales)} pedidos`} body={`${formatCurrency(salesData.amount)} ao todo`} icon={<DollarSign className="h-4 w-4 text-muted-foreground" />} />
+        <DashboardCard title="Clientes" subtitle={`${formatCurrency(userData.avarageValuePerUser)} valor médio`} body={`${formatNumber(userData.userCount)} usuários`} icon={<Users className="h-4 w-4 text-muted-foreground" />} />
+        <DashboardCard title="Produtos" subtitle={`${formatNumber(productData.activeCount)} produtos ativos`} body={`${formatNumber(productData.inactiveCount)} produtos inativos`} icon={<CreditCard className="h-4 w-4 text-muted-foreground" />} />
 
         </div>
       </main>
