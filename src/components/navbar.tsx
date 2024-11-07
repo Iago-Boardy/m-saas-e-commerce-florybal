@@ -1,24 +1,18 @@
 'use client'
 
-import { useEffect } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { ArrowRight, ChevronDown, Clock, ShoppingCart, User } from 'lucide-react'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { useSession } from 'next-auth/react'
 import { handleSignOut } from '../../actions/navbar'
 
 export default function Navbar() {
-  const router = useRouter()
-  const { data: session, status } = useSession()
+  const { data: session } = useSession()
   
   const isAuthenticated = session !== null
   const isAdmin = isAuthenticated && session?.user?.role === 'ADMIN'
   
-  useEffect(() => {
-    router.refresh()
-  }, [router]) 
-
+  
   return (
     <header className="w-full bg-amber-50 border-b border-amber-100 fixed top-0 left-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
