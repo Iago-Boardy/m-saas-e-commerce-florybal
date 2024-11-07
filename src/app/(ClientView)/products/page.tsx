@@ -20,27 +20,10 @@ const products = [
 
 
 export default async function ProductsPage() {
-  const session = await auth();
 
   return (
     <div className="min-h-screen bg-amber-50 flex flex-col">
-      <main className="flex-grow pt-20">
-
-        <h1>{JSON.stringify(session)}</h1>
-        <form action={async () => {
-          "use server";
-
-          await signOut({
-            redirectTo: "/"
-          });
-
-          
-        }}>
-          <button>
-            Sair da conta
-          </button>
-        </form>
-        
+      <main className="flex-grow pt-20">        
         <section className="max-w-7xl mx-auto px-4 py-12">
           <h1 className="text-4xl font-bold text-amber-900 mb-8">Nossos Produtos</h1>
           
