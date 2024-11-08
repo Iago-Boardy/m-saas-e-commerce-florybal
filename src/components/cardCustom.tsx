@@ -17,7 +17,7 @@ export default function ProductCard({ id, name, priceInCents, description, image
     return (
       <Card className="flex overflow-hidden flex-col">
         <div className="relative w-full h-[150px] mb-2">
-          <Image src={imagePath} alt={name} fill/>
+          <Image src={imagePath} alt={name} fill className="object-cover"/>
         </div>
         <CardHeader>
           <CardTitle>{name}</CardTitle>
