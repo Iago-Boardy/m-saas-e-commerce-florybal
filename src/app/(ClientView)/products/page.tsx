@@ -1,9 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ShoppingCart } from 'lucide-react'
+import { ArrowRight, ShoppingCart } from 'lucide-react'
 import SimpleFooter from '@/components/footer'
 import ProductCard from '@/components/cardCustom'
 import { auth, signOut } from "../../../../auth"
+import { db } from '@/lib/db'
+import { Product } from '@prisma/client'
+import { Button } from '@/components/ui/button'
 
 
 const products = [
@@ -17,22 +20,35 @@ const products = [
   { id: 8, name: 'Trufas Sortidas', price: 'R$ 39,99', image: '/placeholder.svg?height=200&width=200' },
 ]
 
+function getMostPopularProducts() {
+  return db.product.findMany({ 
+    where: {isAvaliableForPurchase: true}, 
+    orderBy: { orders: {_count: "desc" } },
+    take: 8 
+  })
+}
 
+function getNewestProducts() {
+  return db.product.findMany({ 
+    where: {isAvaliableForPurchase: true}, 
+    orderBy: { createdAt: "desc"},
+    take: 4  
+  })
+}
 
 export default async function ProductsPage() {
 
   return (
     <div className="min-h-screen bg-amber-50 flex flex-col">
-      <main className="flex-grow pt-20">        
+
+      <main className="flex-grow pt-20">       
+
+
         <section className="max-w-7xl mx-auto px-4 py-12">
-          <h1 className="text-4xl font-bold text-amber-900 mb-8">Nossos Produtos</h1>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {products.slice(0, 4).map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+
+            <ProductGridSection title='Produtos Recentes' productsFetcher={getNewestProducts}/>
         </section>
+
 
         <section className="bg-amber-100 py-16">
           <div className="max-w-7xl mx-auto px-4">
@@ -46,14 +62,9 @@ export default async function ProductsPage() {
           </div>
         </section>
 
-        <section className="max-w-7xl mx-auto px-4 py-12">
-          <h2 className="text-3xl font-bold text-amber-900 mb-8">Mais Delícias</h2>
+        <section className="max-w-7xl mx-auto px-4 py-12">          
+          <ProductGridSection title='Produtos Populares' productsFetcher={getMostPopularProducts}/>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {products.slice(4).map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
         </section>
 
         <section className="bg-amber-200 py-16 mt-12">
@@ -70,6 +81,7 @@ export default async function ProductsPage() {
                   <ShoppingCart className="ml-2 h-5 w-5" />
                 </Link>
               </div>
+
               <div className="md:w-1/2">
                 <Image
                   src="/images/chocolate.webp"
@@ -79,12 +91,46 @@ export default async function ProductsPage() {
                   className="rounded-xl shadow-lg"
                 />
               </div>
+
             </div>
           </div>
         </section>
+
       </main>
 
       <SimpleFooter />
     </div>
   )
 }
+
+type ProductGridSectionProps = {
+  title: string,
+  productsFetcher: () => Promise<Product[]>
+}
+
+async function ProductGridSection( {productsFetcher, title}: ProductGridSectionProps) {
+  return(
+    <div className="space-y-4">
+      <div className='flex gap-4'>
+      <h1 className="text-3xl font-bold text-amber-900 mb-8">{title}</h1>
+      <Button asChild className="inline-flex items-center justify-center gap-2 bg-amber-600 text-[14px] text-white px-6 py-3 rounded-full hover:bg-amber-700 transition duration-300">
+        <Link href="/products/allProducts">
+          <span className="font-medium">Ver todos</span>
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+      </Button>
+
+      </div>
+      
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
+        {(await productsFetcher()).map(product => (
+          <ProductCard key={product.id} {...product}/>
+        ))}
+        
+      </div>
+    </div>
+  )
+  
+}
+
+//grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8

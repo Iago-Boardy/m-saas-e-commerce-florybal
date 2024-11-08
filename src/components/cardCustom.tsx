@@ -1,22 +1,36 @@
+import { formatCurrency } from "@/lib/formatters";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
+import Link from "next/link";
+import { Button } from "./ui/button";
 import Image from "next/image";
 
-export default function ProductCard({ product }) {
+type ProductCardProps = {
+  id: string,
+  name: string,
+  priceInCents: number,
+  description: string,
+  imagePath: string,
+}
+
+export default function ProductCard({ id, name, priceInCents, description, imagePath}: 
+  ProductCardProps) {
     return (
-      <div className="bg-white rounded-xl shadow-md overflow-hidden">
-        <Image
-          src={product.image}
-          alt={product.name}
-          width={200}
-          height={200}
-          className="w-full h-48 object-cover"
-        />
-        <div className="p-4">
-          <h3 className="text-lg font-semibold text-amber-900 mb-2">{product.name}</h3>
-          <p className="text-amber-600 font-bold">{product.price}</p>
-          <button className="mt-4 w-full bg-amber-500 text-white py-2 rounded-md hover:bg-amber-600 transition-colors">
-            Adicionar ao Carrinho
-          </button>
+      <Card className="flex overflow-hidden flex-col">
+        <div className="relative w-full h-[150px] mb-2">
+          <Image src={imagePath} alt={name} fill/>
         </div>
-      </div>
+        <CardHeader>
+          <CardTitle>{name}</CardTitle>
+          <CardDescription>{formatCurrency(priceInCents / 100)}</CardDescription>
+        </CardHeader>
+        <CardContent className="flex-grow">
+          <p className="line-clamp-4">{description}</p>
+        </CardContent>
+        <CardFooter>
+          <Button asChild className="w-full inline-flex items-center justify-center gap-2 bg-amber-600 text-[14px] text-white px-6 py-3 rounded-full hover:bg-amber-700 transition duration-300">
+            <Link href={`/products/${id}/purchase`}>Comprar</Link>
+          </Button>
+        </CardFooter>
+      </Card>
     )
   }
