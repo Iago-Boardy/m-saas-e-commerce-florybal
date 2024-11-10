@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { ArrowRight, ShoppingCart } from 'lucide-react'
 import SimpleFooter from '@/components/footer'
 import ProductCard from '@/components/cardCustom'
-import { auth, signOut } from "../../../../auth"
 import { db } from '@/lib/db'
 import { Product } from '@prisma/client'
 import { Button } from '@/components/ui/button'
