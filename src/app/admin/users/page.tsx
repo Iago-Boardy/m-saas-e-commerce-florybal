@@ -9,6 +9,7 @@ import Link from "next/link"
 import { MoreVertical, Mail, ShoppingBag, DollarSign } from "lucide-react"
 import { formatCurrency, formatNumber } from "@/lib/formatters"
 import { db } from "@/lib/db"
+import { DeleteDropdownUsersItem } from "@/components/UsersActions"
 
 export default function AdminUsersPage() {
   return (
@@ -87,9 +88,7 @@ async function UsersTable() {
                     <span className="sr-only">Ações</span>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
-                    <DropdownMenuItem asChild>
-                      <Link href={"#"}>Sem ações disponíveis</Link>
-                    </DropdownMenuItem>
+                    <DeleteDropdownUsersItem id={user.id}/>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </TableCell>
