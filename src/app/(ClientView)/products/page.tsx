@@ -62,7 +62,7 @@ export default async function ProductsPage() {
                 <h2 className="text-3xl font-bold text-amber-900 mb-4">Experimente Nossa Coleção Especial</h2>
                 <p className="text-amber-800 mb-6">Descubra sabores únicos e irresistíveis em nossa linha premium de chocolates artesanais.</p>
                 <Link 
-                  href="/colecao-especial" 
+                  href="/allProducts" 
                   className="bg-amber-600 text-white px-6 py-3 rounded-full hover:bg-amber-700 transition-colors inline-flex items-center"
                 >
                   Ver Coleção Especial

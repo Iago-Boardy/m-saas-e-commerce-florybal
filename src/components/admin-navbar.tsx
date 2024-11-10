@@ -22,6 +22,9 @@ export default function AdminNavbar() {
                     <Button variant="ghost" asChild>
                         <Link href="/admin/users">Usuários</Link>
                     </Button>
+                    <Button variant="ghost" asChild>
+                        <Link href="/admin/sales">Vendas</Link>
+                    </Button>
                 </nav>
             </div>
         </header>

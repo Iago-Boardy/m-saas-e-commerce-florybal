@@ -36,7 +36,7 @@ export function DeleteDropdownItem({ id, disabled }: { id: string, disabled: boo
         })
       }}
     >
-      Delete
+      Deletar
     </DropdownMenuItem>
   )
 }

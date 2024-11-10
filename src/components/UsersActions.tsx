@@ -17,7 +17,7 @@ export function DeleteDropdownUsersItem({ id }: { id: string,}) {
         })
       }}
     >
-      Delete
+      Deletar
     </DropdownMenuItem>
   )
 }
