@@ -8,17 +8,6 @@ import { Product } from '@prisma/client'
 import { Button } from '@/components/ui/button'
 
 
-const products = [
-  { id: 1, name: 'Trufa de Chocolate', price: 'R$ 5,99', image: '/placeholder.svg?height=200&width=200' },
-  { id: 2, name: 'Barra de Chocolate ao Leite', price: 'R$ 12,99', image: '/placeholder.svg?height=200&width=200' },
-  { id: 3, name: 'Bombom Recheado', price: 'R$ 3,99', image: '/placeholder.svg?height=200&width=200' },
-  { id: 4, name: 'Chocolate Amargo 70%', price: 'R$ 15,99', image: '/placeholder.svg?height=200&width=200' },
-  { id: 5, name: 'Caixa de Pralinés', price: 'R$ 29,99', image: '/placeholder.svg?height=200&width=200' },
-  { id: 6, name: 'Chocolate com Avelã', price: 'R$ 18,99', image: '/placeholder.svg?height=200&width=200' },
-  { id: 7, name: 'Barra de Chocolate Branco', price: 'R$ 13,99', image: '/placeholder.svg?height=200&width=200' },
-  { id: 8, name: 'Trufas Sortidas', price: 'R$ 39,99', image: '/placeholder.svg?height=200&width=200' },
-]
-
 function getMostPopularProducts() {
   return db.product.findMany({ 
     where: {isAvaliableForPurchase: true}, 
@@ -113,7 +102,7 @@ async function ProductGridSection( {productsFetcher, title}: ProductGridSectionP
       <div className='flex gap-4'>
       <h1 className="text-3xl font-bold text-amber-900 mb-8">{title}</h1>
       <Button asChild className="inline-flex items-center justify-center gap-2 bg-amber-600 text-[14px] text-white px-6 py-3 rounded-full hover:bg-amber-700 transition duration-300">
-        <Link href="/products/allProducts">
+        <Link href="/allProducts">
           <span className="font-medium">Ver todos</span>
           <ArrowRight className="w-4 h-4" />
         </Link>
@@ -132,4 +121,3 @@ async function ProductGridSection( {productsFetcher, title}: ProductGridSectionP
   
 }
 
-//grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8

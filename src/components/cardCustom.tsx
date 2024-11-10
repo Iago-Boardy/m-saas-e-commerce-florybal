@@ -37,7 +37,7 @@ export default function ProductCard({ id, name, priceInCents, description, image
       </CardContent>
       <CardFooter className="pt-0">
         <Button asChild className="w-full bg-amber-600 text-white px-6 py-3 rounded-full hover:bg-amber-700 transition duration-300 text-sm font-semibold">
-          <Link href={`/products/${id}/purchase`}>
+          <Link href={`/products/${id}`}>
             Comprar Agora
           </Link>
         </Button>
