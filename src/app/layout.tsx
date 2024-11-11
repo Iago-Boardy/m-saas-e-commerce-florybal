@@ -16,7 +16,6 @@ export default function RootLayout({
 }>) {
   const pathname = usePathname();
 
-  // Oculta a Navbar nas rotas /admin e /auth
   const showNavbar = !pathname.startsWith("/admin") && !pathname.startsWith("/auth"); 
 
   return (

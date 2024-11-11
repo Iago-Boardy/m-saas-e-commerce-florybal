@@ -49,11 +49,7 @@ export default function Navbar() {
                     </DropdownMenuItem>
                     <DropdownMenuItem className="hover:bg-amber-100 rounded-md px-2 py-1 cursor-pointer focus:bg-amber-100 focus:outline-none flex items-center">
                       <Clock className="mr-2 h-4 w-4 text-amber-700 flex-shrink-0" />
-                      <Link href="/historico" className="text-amber-900">Histórico</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="hover:bg-amber-100 rounded-md px-2 py-1 cursor-pointer focus:bg-amber-100 focus:outline-none flex items-center">
-                      <ShoppingCart className="mr-2 h-4 w-4 text-amber-700 flex-shrink-0" />
-                      <Link href="/carrinho" className="text-amber-900">Carrinho</Link>
+                      <Link href="/orders" className="text-amber-900">Histórico</Link>
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator className="bg-amber-200 my-1" />
