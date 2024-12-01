@@ -48,6 +48,10 @@ export default function Navbar() {
                       <Link href="/perfil" className="text-amber-900">Perfil</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem className="hover:bg-amber-100 rounded-md px-2 py-1 cursor-pointer focus:bg-amber-100 focus:outline-none flex items-center">
+                      <User className="mr-2 h-4 w-4 text-amber-700 flex-shrink-0" />
+                      <Link href="/cart" className="text-amber-900">Carrinho de compras</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="hover:bg-amber-100 rounded-md px-2 py-1 cursor-pointer focus:bg-amber-100 focus:outline-none flex items-center">
                       <Clock className="mr-2 h-4 w-4 text-amber-700 flex-shrink-0" />
                       <Link href="/orders" className="text-amber-900">Histórico</Link>
                     </DropdownMenuItem>

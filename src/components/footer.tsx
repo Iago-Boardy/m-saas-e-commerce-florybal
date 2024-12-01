@@ -15,16 +15,16 @@ export default function SimpleFooter() {
             <Link href="/politica-privacidade" className="text-xs hover:text-amber-600 transition-colors">
               Política de Privacidade
             </Link>
-            <Link href="/termos-uso" className="text-xs hover:text-amber-600 transition-colors">
-              Termos de Uso
+            <Link href="/team" className="text-xs hover:text-amber-600 transition-colors">
+              Desenvolvedores
             </Link>
-            <Link href="#" className="hover:text-amber-600 transition-colors">
+            <Link href="https://www.facebook.com/florybalrepresentacoes/?locale=pt_BR" className="hover:text-amber-600 transition-colors">
               <Facebook size={18} />
             </Link>
             <Link href="#" className="hover:text-amber-600 transition-colors">
               <Instagram size={18} />
             </Link>
-            <Link href="#" className="hover:text-amber-600 transition-colors">
+            <Link href="https://www.instagram.com/gabriel_gaelzer/" className="hover:text-amber-600 transition-colors">
               <Twitter size={18} />
             </Link>
           </div>
