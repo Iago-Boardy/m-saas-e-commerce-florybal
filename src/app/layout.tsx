@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import Navbar from "@/components/navbar";
 import { usePathname } from "next/navigation";
 import { SessionProvider } from "next-auth/react";
+import { CartProvider } from "@/context/CartContext";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -21,10 +22,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn("bg-background min-h-screen font-sans antialiased", inter.variable)}>
+        <CartProvider>
         <SessionProvider>
           {showNavbar && <Navbar />}
           {children}
         </SessionProvider>
+        </CartProvider>
       </body>
     </html>
   );

@@ -23,13 +23,13 @@ export default async function UniqueProductPage({ params: { id } }: { params: { 
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-amber-100 flex flex-col">
-      <main className="flex-grow pt-20 pb-12">
-        <div className="max-w-7xl mx-auto px-4">
+      <main className="flex-grow pt-24 pb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ProductDetails product={product} />
 
-          <section className="-mt-[370px]">
+          <section className="mt-24">
             <h2 className="text-3xl font-bold text-amber-900 mb-8">Outros Produtos que Você Pode Gostar</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {relatedProducts.map(relatedProduct => (
                 <ProductCard key={relatedProduct.id} {...relatedProduct} />
               ))}
@@ -41,3 +41,4 @@ export default async function UniqueProductPage({ params: { id } }: { params: { 
     </div>
   )
 }
+

@@ -14,19 +14,24 @@ export default async function SuccessPage({
   }
 
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: '2024-10-28.acacia',
+    apiVersion: '2024-11-20.acacia',
   });
 
   try {
     const session = await stripe.checkout.sessions.retrieve(sessionId);
-    
-    if (session.payment_status === 'paid') {
-      // Create order in database
+
+    // Verifique se o pagamento foi bem-sucedido e se session.metadata não é null
+    if (session.payment_status === 'paid' && session.metadata) {
+      // Recupere os IDs dos produtos e o valor total da metadata
+      const productIds = session.metadata.productIds?.split(',') || []; // IDs dos produtos no carrinho
+      const totalAmount = parseInt(session.metadata.totalAmount || '0', 10); // Total do carrinho
+
+      // Crie o pedido no banco de dados
       await db.order.create({
         data: {
-          pricePaidInCents: session.amount_total!,
+          pricePaidInCents: totalAmount,
           userId: session.metadata?.userId || 'guest',
-          productId: session.metadata?.productId!,
+          productId: productIds.join(','), // Armazene os IDs dos produtos no pedido
         },
       });
     }
