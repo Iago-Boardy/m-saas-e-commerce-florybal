@@ -23,7 +23,7 @@ const initialDevelopers: Developer[] = [
   },
   {
     name: "Iago Boardman Padilha",
-    role: "Desenvolvedor Full Stack",
+    role: "Desenvolvedor Front end",
     github: "Iago-Boardy",
     linkedin: "https://www.linkedin.com/in/iago-boardman-padilha-057aab285/"
   }
@@ -37,7 +37,7 @@ async function getGithubProfileImage(username: string): Promise<string> {
     return data.avatar_url
   } catch (error) {
     console.error(`Error fetching GitHub profile for ${username}:`, error)
-    return '/placeholder.svg?height=400&width=400' // Fallback to placeholder
+    return '/placeholder.svg?height=400&width=400'
   }
 }
 

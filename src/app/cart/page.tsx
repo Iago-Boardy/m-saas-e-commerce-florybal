@@ -20,42 +20,17 @@ export default function CartPage() {
   }
 
   const handleCheckout = async () => {
-    console.log('Checkout initiated')
-    console.log('Cart contents:', cart)
-  
     try {
-      const response = await fetch('/api/create-checkout-session', {
-        method: 'POST',
-        body: JSON.stringify(
-          cart.map(item => ({
-            productId: item.productId,
-            priceInCents: item.priceInCents,
-            productName: item.name,
-            quantity: item.quantity,
-          }))
-        ),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-  
-      console.log('Response status:', response.status)
-  
-      if (!response.ok) {
-        const errorText = await response.text()
-        console.error('Server error:', errorText)
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-  
-      const { sessionId } = await response.json()
-      console.log('Received sessionId:', sessionId)
-  
-      router.push(`/checkout/${sessionId}`)
+      const sessionId = Math.random().toString(36).substring(2, 15);
+      
+      
+      router.push(`/checkout/${sessionId}`);
     } catch (error) {
-      console.error('Full checkout error:', error)
-      alert('Erro ao processar o checkout. Por favor, tente novamente.')
+      console.error('Erro ao iniciar o checkout:', error);
+      alert('Ocorreu um erro ao processar seu pedido. Por favor, tente novamente.');
     }
-  }
+  };
+  
 
   return (
     <div className="min-h-screen bg-amber-50 flex flex-col">
