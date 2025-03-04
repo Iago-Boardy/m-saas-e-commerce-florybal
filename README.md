@@ -1,6 +1,6 @@
 <h1 align="center" id="title">M-SaaS E-Commerce Florybal 🛍️</h1>
 
-<p id="description">A scalable and modern e-commerce platform for Florybal, designed to explore advanced functionalities using Next.js, Prisma, Stripe, and cloud-native technologies. This is the final project for the Information Technology (IT) course.</p>
+<p id="description">A scalable and modern e-commerce platform for Florybal, designed to explore advanced functionalities using Next.js, Prisma, Stripe, and cloud-native technologies. This is the final project for the Information Technology (IT) course. Last time we ran the project, everything was working fine.</p>
 
 <h2> How to Run it</h2>
 
