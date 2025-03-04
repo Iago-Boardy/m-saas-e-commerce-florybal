@@ -2,6 +2,34 @@
 
 <p id="description">A scalable and modern e-commerce platform for Florybal, designed to explore advanced functionalities using Next.js, Prisma, Stripe, and cloud-native technologies. This is the final project for the Information Technology (IT) course.</p>
 
+<h2> How to Run it</h2>
+
+Follow these steps to set up and run the project locally:
+
+1. Clone the repository:
+```sh
+  git clone https://github.com/Iago-Boardy/m-saas-e-commerce-florybal.git
+```
+2. Navigate to the project folder:
+```sh
+  cd m-saas-e-commerce-florybal
+```
+3. Install dependencies
+```sh
+  npm install
+```
+4. Ensure that the environment files (.env and .env.local) are present in the project root and correctly configured with the necessary environment variables.
+* If they don’t exist, create them and configure the necessary environment variables.
+   
+6. Run the development server:
+```sh
+npm run dev
+```
+
+7. Open http://localhost:3000 in your browser to see the application running.
+
+<br/>
+
 <h2>🧐 Features</h2>
 
 Key features of the Florybal M-SaaS E-Commerce platform:
